@@ -1,6 +1,6 @@
 package com.example.Library.service;
 
-import com.example.Library.entities.Books;
+import com.example.Library.entities.Book;
 import com.example.Library.repository.Booksrepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,23 +14,24 @@ public class Booksservice {
     public Booksrepo  booksrepo;
 
 
-    public Books addnewbook (Books books){
+    public Book addnewbook (Book books){
         return booksrepo.save(books);
     }
 
-    public List<Books>viewallbooks(){
+    public List<Book>viewallbooks(){
         return booksrepo.findAll();
     }
 
-    public Books updatebooks(Books books){ return booksrepo.save(books);}
+    public Book updatebooks(Book books){ return booksrepo.save(books);}
 
-    public List<Books>findByBookname(Books input){
-        String existingbook = input.getBookname();
-        return booksrepo.findByBookname(existingbook);
-    }
-    public boolean deletebyid (Books input){
+   public List<Book>findByBookname(Book input){
+      String existingBook = input.getBookname();
+      String existingAuthor = input.getBookauthor()
+;      return booksrepo.findByBooknameAndBookauthor(existingBook,existingAuthor);
+ }
+    public boolean deletebyid (Book input){
         String existingbooks = input.getBookname();
-        long idNum = input .getId();
+        long idNum = input .getBookid();
         booksrepo.deleteById(idNum);
         return true;
     }

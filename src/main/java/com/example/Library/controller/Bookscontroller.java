@@ -1,6 +1,6 @@
 package com.example.Library.controller;
 
-import com.example.Library.entities.Books;
+import com.example.Library.entities.Book;
 import com.example.Library.service.Booksservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,27 +17,27 @@ public class Bookscontroller {
     private Booksservice booksservice;
 
     @PostMapping("/add")
-    public ResponseEntity<Books>savebook(@RequestBody Books input){
-        return new ResponseEntity<Books>(booksservice.addnewbook(input), HttpStatus.CREATED);
+    public ResponseEntity<Book>savebook(@RequestBody Book input){
+        return new ResponseEntity<Book>(booksservice.addnewbook(input), HttpStatus.CREATED);
     }
 
     @GetMapping("/get/books")
-    public List <Books> getallbooks(){
+    public List <Book> getallbooks(){
         return booksservice.viewallbooks();
     }
 
-    @GetMapping("/get/bookname")
-    public ResponseEntity<List<Books>>findBookByBookname(@RequestBody Books input){
-        return new ResponseEntity<List<Books>>(booksservice.findByBookname(input),HttpStatus.FOUND);
-    }
+   @GetMapping("/get/bookname")
+   public ResponseEntity<List<Book>>findBookByBookname(@RequestBody Book input){
+     return new ResponseEntity<List<Book>>(booksservice.findByBookname(input),HttpStatus.FOUND);
+  }
 
     @PutMapping("/update")
-    public ResponseEntity<Books>updatbooks(@RequestBody Books books){
-        return new ResponseEntity<Books>(booksservice.updatebooks(books), HttpStatus.ACCEPTED);
+    public ResponseEntity<Book>updatbooks(@RequestBody Book books){
+        return new ResponseEntity<Book>(booksservice.updatebooks(books), HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/delete")
-    public boolean deletebooks (@RequestBody Books input){
+    public boolean deletebooks (@RequestBody Book input){
         booksservice.deletebyid(input);
         return true;
     }

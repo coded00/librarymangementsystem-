@@ -5,11 +5,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "books")
 
-public class Books {
+public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long bookid;
     @Column
     private  String bookname;
 
@@ -20,12 +20,12 @@ public class Books {
     private String bookstatus;
 
 
-    public Long getId() {
-        return id;
+    public Long getBookid() {
+        return bookid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setBookid(Long bookid) {
+        this.bookid = bookid;
     }
 
     public String getBookname() {
@@ -55,7 +55,7 @@ public class Books {
     @Override
     public String toString() {
         return "Books{" +
-                "id=" + id +
+                "bookid=" + bookid +
                 ", bookname='" + bookname + '\'' +
                 ", bookauthor='" + bookauthor + '\'' +
                 ", bookstatus='" + bookstatus + '\'' +
