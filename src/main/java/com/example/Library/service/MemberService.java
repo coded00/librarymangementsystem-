@@ -20,17 +20,11 @@ public class MemberService {
 
 
     public Member addnewUser (Member input){
-        String existingUser = input.getEmail();
-
        return memberRepository.save(input);
     }
 
 
     public Member updateUsers (Member input){
-        String existingUser = input.getEmail();
-        if(existingUser == null ){
-            throw new RuntimeException("Theres nothing to update");
-        }
         return memberRepository.save(input);
     }
 
@@ -38,6 +32,13 @@ public class MemberService {
         String existingUser = input.getEmail();
         return memberRepository.findMembersByEmail(existingUser);
    }
+
+    public boolean deletebyid (Member input){
+        String existingMember = input.getUserName();
+        long idNum = input.getId();
+        memberRepository.deleteById(idNum);
+        return true;
+    }
 
    public Member assignedBooks(String bookname, String email){
        Member member =  memberRepository.findByEmail(email);

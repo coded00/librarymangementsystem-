@@ -25,7 +25,7 @@ public class Member {
     @Column
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Book> books = new ArrayList<>();
 
 
@@ -34,7 +34,7 @@ public class Member {
     }
 
     public void setId(Long id) {
-        id = id;
+        this.id = id;
     }
 
     public String getFirstName() {

@@ -1,5 +1,6 @@
 package com.example.Library.controller;
 
+import com.example.Library.entities.Book;
 import com.example.Library.entities.Member;
 import com.example.Library.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/users")
+@RequestMapping(value = "/members")
 public class MemberController {
 
     @Autowired
@@ -33,8 +34,14 @@ public class MemberController {
     }
 
     @PutMapping(value = "/usercart")
-    public Member assignedBooks(@RequestParam(value = "bookname") String bookname,
+    public Member assignedBooks (@RequestParam(value = "bookname") String bookname,
                                 @RequestParam(value = "email")String email){
       return   memberService.assignedBooks(bookname,email);
+    }
+
+    @DeleteMapping("/delete")
+    public boolean deleteMemeber (@RequestBody Member input){
+        memberService.deletebyid(input);
+        return true;
     }
 }

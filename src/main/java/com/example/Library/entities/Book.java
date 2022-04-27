@@ -10,6 +10,7 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long bookid;
+
     @Column
     private  String bookname;
 
