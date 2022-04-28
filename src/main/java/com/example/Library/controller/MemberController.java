@@ -18,30 +18,30 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
-    @PostMapping(value = "/adduser")
+    @PostMapping(value = "/add")
     public ResponseEntity<Member>addNewUsers(@RequestBody Member input){
         return new ResponseEntity<Member>(memberService.addnewUser(input), HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/update")
-    public ResponseEntity<Member>updatinguser(@RequestBody Member input){
+    public ResponseEntity<Member>updatingUser(@RequestBody Member input){
         return new ResponseEntity<Member>(memberService.updateUsers(input),HttpStatus.ACCEPTED);
     }
 
-    @GetMapping(value="getUser")
+    @GetMapping(value="getMember")
     public ResponseEntity<List<Member>>findByMail(@RequestBody Member input){
         return new ResponseEntity<List<Member>>(memberService.findByEmail(input),HttpStatus.FOUND);
     }
 
-    @PutMapping(value = "/usercart")
-    public Member assignedBooks (@RequestParam(value = "bookname") String bookname,
+    @PutMapping(value = "/cart")
+    public Member memberBooks (@RequestParam(value = "bookName") String bookname,
                                 @RequestParam(value = "email")String email){
-      return   memberService.assignedBooks(bookname,email);
+      return memberService.assignedBooks(bookname,email);
     }
 
     @DeleteMapping("/delete")
     public boolean deleteMemeber (@RequestBody Member input){
-        memberService.deletebyid(input);
+        memberService.deletebyId(input);
         return true;
     }
 }

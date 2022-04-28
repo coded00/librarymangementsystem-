@@ -33,17 +33,17 @@ public class MemberService {
         return memberRepository.findMembersByEmail(existingUser);
    }
 
-    public boolean deletebyid (Member input){
+    public boolean deletebyId (Member input){
         String existingMember = input.getUserName();
         long idNum = input.getId();
         memberRepository.deleteById(idNum);
         return true;
     }
 
-   public Member assignedBooks(String bookname, String email){
+   public Member assignedBooks (String bookname , String email){
        Member member =  memberRepository.findByEmail(email);
        Book book = booksrepo.findByBookname(bookname);
        member.getBooks().add(book);
-       return member;
+       return memberRepository.save(member);
    }
 }
