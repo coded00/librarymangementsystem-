@@ -1,6 +1,9 @@
 package com.example.Library.controller;
 
 import com.example.Library.entities.Book;
+import com.example.Library.entities.Member;
+import com.example.Library.entities.Rating;
+import com.example.Library.entities.RatingRequest;
 import com.example.Library.service.Booksservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,6 +43,11 @@ public class Bookscontroller {
     public boolean deletebooks (@RequestBody Book input){
         booksservice.deletebyid(input);
         return true;
+    }
+
+    @PostMapping("/rate")
+    public Rating rateBook (@RequestBody RatingRequest request){
+        return booksservice.rateBook(request.getUserName(),request.getBookname(),request.getRating(),request.getReview());
     }
 
 
