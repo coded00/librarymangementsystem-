@@ -50,5 +50,9 @@ public class Bookscontroller {
         return booksservice.rateBook(request.getUserName(),request.getBookname(),request.getRating(),request.getReview());
     }
 
+    @GetMapping("get/rate")
+    public List<Rating>findrate( @RequestParam(name ="bookName") String bookName){
+        return booksservice.viewrate(bookName);
+    }
 
 }

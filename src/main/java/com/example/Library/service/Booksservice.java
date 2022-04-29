@@ -17,7 +17,7 @@ import java.util.List;
 public class Booksservice {
 
     @Autowired
-    public Booksrepo  booksrepo;
+    public Booksrepo booksrepo;
 
     @Autowired
     private RatingRepository ratingRepository;
@@ -25,29 +25,32 @@ public class Booksservice {
     @Autowired
     private MemberRepository memberRepository;
 
-    public Book addnewbook (Book books){
+    public Book addnewbook(Book books) {
         return booksrepo.save(books);
     }
 
-    public List<Book>viewallbooks(){
+    public List<Book> viewallbooks() {
         return booksrepo.findAll();
     }
 
-    public Book updatebooks(Book books){ return booksrepo.save(books);}
+    public Book updatebooks(Book books) {
+        return booksrepo.save(books);
+    }
 
-   public List<Book>findByBookname(Book input){
-      String existingBook = input.getBookname();
-      String existingAuthor = input.getBookauthor()
-;      return booksrepo.findByBooknameAndBookauthor(existingBook,existingAuthor);
- }
-    public boolean deletebyid (Book input){
+    public List<Book> findByBookname(Book input) {
+        String existingBook = input.getBookname();
+        String existingAuthor = input.getBookauthor();
+        return booksrepo.findByBooknameAndBookauthor(existingBook, existingAuthor);
+    }
+
+    public boolean deletebyid(Book input) {
         String existingbooks = input.getBookname();
-        long idNum = input .getBookid();
+        long idNum = input.getBookid();
         booksrepo.deleteById(idNum);
         return true;
     }
 
-    public Rating rateBook (String userName , String bookname, int rating , String review){
+    public Rating rateBook(String userName, String bookname, int rating, String review) {
         Member member = memberRepository.findByUserName(userName);
         Book book = booksrepo.findByBookname(bookname);
         Rating rate = new Rating();
@@ -59,12 +62,15 @@ public class Booksservice {
 
     }
 
-
-
-
-
-
+    public List<Rating> viewrate(String bookname) {
+        Book book = booksrepo.findByBookname(bookname);
+        List<Rating> rate = ratingRepository.findByBook(book);
+        rate.removeIf(r -> r.getMember() == null);
+        return rate;
 
     }
+
+
+}
 
 
