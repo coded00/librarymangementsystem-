@@ -67,9 +67,13 @@ public class Booksservice {
         List<Rating> rate = ratingRepository.findByBook(book);
         rate.removeIf(r -> r.getMember() == null);
         return rate;
-
     }
 
+    public Book changeBookStatus(String bookname, String status) {
+        Book book = booksrepo.findByBookname(bookname);
+        book.setBookstatus(status);
+        return booksrepo.save(book);
+    }
 
 }
 

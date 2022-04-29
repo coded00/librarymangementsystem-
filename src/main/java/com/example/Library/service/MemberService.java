@@ -43,6 +43,9 @@ public class MemberService {
    public Member assignedBooks (String bookname , String email){
        Member member =  memberRepository.findByEmail(email);
        Book book = booksrepo.findByBookname(bookname);
+       if(book.getBookstatus().equals("BLACKLISTED")){
+           throw  new RuntimeException("Books is BLACKLISTED");
+       }
        member.getBooks().add(book);
        return memberRepository.save(member);
 

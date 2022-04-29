@@ -20,39 +20,45 @@ public class Bookscontroller {
     private Booksservice booksservice;
 
     @PostMapping("/add")
-    public ResponseEntity<Book>savebook(@RequestBody Book input){
+    public ResponseEntity<Book> savebook(@RequestBody Book input) {
         return new ResponseEntity<Book>(booksservice.addnewbook(input), HttpStatus.CREATED);
     }
 
     @GetMapping("/get/books")
-    public List <Book> getallbooks(){
+    public List<Book> getallbooks() {
         return booksservice.viewallbooks();
     }
 
-   @GetMapping("/get/bookname")
-   public ResponseEntity<List<Book>>findBookByBookname(@RequestBody Book input){
-     return new ResponseEntity<List<Book>>(booksservice.findByBookname(input),HttpStatus.FOUND);
-  }
+    @GetMapping("/get/bookname")
+    public ResponseEntity<List<Book>> findBookByBookname(@RequestBody Book input) {
+        return new ResponseEntity<List<Book>>(booksservice.findByBookname(input), HttpStatus.FOUND);
+    }
 
     @PutMapping("/update")
-    public ResponseEntity<Book>updatbooks(@RequestBody Book books){
+    public ResponseEntity<Book> updatbooks(@RequestBody Book books) {
         return new ResponseEntity<Book>(booksservice.updatebooks(books), HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/delete")
-    public boolean deletebooks (@RequestBody Book input){
+    public boolean deletebooks(@RequestBody Book input) {
         booksservice.deletebyid(input);
         return true;
     }
 
     @PostMapping("/rate")
-    public Rating rateBook (@RequestBody RatingRequest request){
-        return booksservice.rateBook(request.getUserName(),request.getBookname(),request.getRating(),request.getReview());
+    public Rating rateBook(@RequestBody RatingRequest request) {
+        return booksservice.rateBook(request.getUserName(), request.getBookname(), request.getRating(), request.getReview());
     }
 
     @GetMapping("get/rate")
-    public List<Rating>findrate( @RequestParam(name ="bookName") String bookName){
+    public List<Rating> findrate(@RequestParam(name = "bookName") String bookName) {
         return booksservice.viewrate(bookName);
+    }
+
+    @PutMapping("/status")
+    public ResponseEntity<Book> changeBookStatus(@RequestParam(name = "bookName") String bookname,
+                                                 @RequestParam(name = "bookStatus") String status) {
+        return new ResponseEntity<Book>(booksservice.changeBookStatus(bookname,status), HttpStatus.ACCEPTED);
     }
 
 }
