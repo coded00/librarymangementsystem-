@@ -40,7 +40,7 @@ public class MemberController {
     }
 
     @DeleteMapping("/delete")
-    public boolean deleteMemeber (@RequestBody Member input){
+    public boolean deleteMember (@RequestBody Member input){
         memberService.deletebyId(input);
         return true;
     }

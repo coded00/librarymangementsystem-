@@ -26,4 +26,10 @@ public class ShelfController {
     public ResponseEntity<Shelf>updateShelf(@RequestBody Shelf input){
         return  new ResponseEntity<Shelf>(shelfService.updateshelf(input),HttpStatus.ACCEPTED);
     }
+
+    @DeleteMapping("/delete")
+    public boolean deleteById(@RequestBody Shelf input){
+        shelfService.deleteById(input);
+        return true;
+    }
 }

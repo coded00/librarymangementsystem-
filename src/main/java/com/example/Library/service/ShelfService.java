@@ -24,4 +24,11 @@ public class ShelfService {
    public Shelf updateshelf ( Shelf input ){
        return shelfRepository.save(input);
    }
+
+   public boolean deleteById(Shelf input){
+       String existingShelf = input.getShelfName();
+       Long idNum = input.getShelfId();
+       shelfRepository.deleteById(idNum);
+       return true;
+   }
 }
