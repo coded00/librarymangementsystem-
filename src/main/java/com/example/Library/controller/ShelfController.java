@@ -1,7 +1,9 @@
 package com.example.Library.controller;
 
 
+import com.example.Library.entities.Book;
 import com.example.Library.entities.Shelf;
+import com.example.Library.service.MemberService;
 import com.example.Library.service.ShelfService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,9 @@ public class ShelfController {
 
     @Autowired
     private ShelfService shelfService;
+
+    @Autowired
+    private MemberService memberService;
 
     @PostMapping("/add")
     public ResponseEntity<Shelf>addNewShelf(@RequestBody Shelf input){
@@ -32,4 +37,12 @@ public class ShelfController {
         shelfService.deleteById(input);
         return true;
     }
+
+    @PutMapping("/shelfing")
+    public Shelf assignedBooks (@RequestParam(name = "bookname") String bookname ,
+                                @RequestParam(name="shelfName") String shelfName){
+        return shelfService.assignedBooks(bookname,shelfName);
+    }
+
+
 }

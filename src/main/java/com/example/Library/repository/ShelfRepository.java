@@ -9,4 +9,6 @@ import javax.persistence.Entity;
 @Repository
 public interface ShelfRepository extends JpaRepository <Shelf,Long>{
     Shelf findByShelfName(Shelf input);
+    Shelf findByCategory(String category);
+    Shelf findByShelfName(String shelfName);
 }

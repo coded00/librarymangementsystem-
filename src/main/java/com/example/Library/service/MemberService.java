@@ -45,5 +45,16 @@ public class MemberService {
        Book book = booksrepo.findByBookname(bookname);
        member.getBooks().add(book);
        return memberRepository.save(member);
+
+
    }
+
+    public Member removeBooks (String bookname , String email){
+        Member member =  memberRepository.findByEmail(email);
+        Book book = booksrepo.findByBookname(bookname);
+        member.getBooks().remove(book);
+        return memberRepository.save(member);
+
+
+    }
 }
